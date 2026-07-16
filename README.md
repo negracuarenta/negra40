@@ -57,6 +57,7 @@ npm run preview  # sirve dist/ localmente para revisar el build de producción
 ## Pendientes conocidos
 
 - **Node.js**: este proyecto se armó sin poder correr `npm install`/`npm run dev` en la máquina donde se generó — probá el build localmente antes de la primera publicación.
+- **`package-lock.json`**: no existe todavía (no se pudo generar sin Node.js). El workflow usa `npm install` en vez de `npm ci` por eso. Corré `npm install` localmente, commiteá el `package-lock.json` que se genera, y después podés volver a `npm ci` + `cache: npm` en `.github/workflows/deploy.yml` para builds más rápidos y reproducibles.
 - **Redes sociales**: los links de Facebook / Instagram / Vimeo en el footer y en Contacto son placeholders (`href="#"`, marcados con `TODO` en el código) porque el contenido scrapeado del sitio viejo no incluía las URLs reales. Buscá `TODO: reemplazar` en `src/components/Footer.astro` y en `src/pages/{es,en}/contacto.astro`.
 - **Dominio propio**: `astro.config.mjs` está configurado para `usuario.github.io/negra40`. Para migrar a `negra40.com`, cambiá `site` y `base` en `astro.config.mjs`, agregá un archivo `public/CNAME` con el dominio, y configurá el DNS.
 
