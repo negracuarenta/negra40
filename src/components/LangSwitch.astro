@@ -1,0 +1,18 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** Path after the locale prefix, e.g. "/proyectos/accion-duero/" or "/". */
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const other: Lang = lang === 'es' ? 'en' : 'es';
+const href = getRelativeLocaleUrl(other, path);
+---
+
+<div class="lang-switch">
+  <a href={href} hreflang={other}>{t(lang, 'lang_switch')}</a>
+</div>

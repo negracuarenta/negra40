@@ -1,0 +1,61 @@
+---
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  audio: {
+    type: 'native' | 'soundcloud' | 'bandcamp' | 'drive' | 'vimeo';
+    url: string;
+    label?: string;
+  };
+}
+
+const { lang, audio } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<div class="audio-embed">
+  {
+    audio.type === 'native' && (
+      <audio controls src={`${base}${audio.url.replace(/^\//, '')}`}>
+        <a href={`${base}${audio.url.replace(/^\//, '')}`}>{audio.label ?? 'CENA_Extracto.mp3'}</a>
+      </audio>
+    )
+  }
+  {
+    audio.type === 'soundcloud' && (
+      <iframe
+        title={audio.label ?? 'SoundCloud player'}
+        height="166"
+        scrolling="no"
+        allow="autoplay"
+        src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(audio.url)}&color=%23111111&auto_play=false&show_teaser=false`}
+      />
+    )
+  }
+  {
+    audio.type === 'vimeo' && (
+      <iframe
+        title={audio.label ?? 'Vimeo player'}
+        src={audio.url}
+        height="450"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+      />
+    )
+  }
+  {
+    audio.type === 'bandcamp' && (
+      <a class="external-link" href={audio.url} target="_blank" rel="noopener noreferrer">
+        {t(lang, 'listen_on')} Bandcamp →
+      </a>
+    )
+  }
+  {
+    audio.type === 'drive' && (
+      <a class="external-link" href={audio.url} target="_blank" rel="noopener noreferrer">
+        {t(lang, 'open_folder')} Google Drive →
+      </a>
+    )
+  }
+</div>

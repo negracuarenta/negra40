@@ -1,0 +1,63 @@
+---
+import { getEntry, render } from 'astro:content';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Layout from './Layout.astro';
+import Gallery from './Gallery.astro';
+import AudioEmbed from './AudioEmbed.astro';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const entry = await getEntry('proyectos', `${lang}/${slug}`);
+if (!entry) throw new Error(`Proyecto not found: ${lang}/${slug}`);
+const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL;
+const year = entry.data.date ? new Date(entry.data.date).getFullYear() : null;
+const [cover, ...rest] = entry.data.images;
+---
+
+<Layout
+  lang={lang}
+  title={entry.data.title}
+  description={entry.data.location}
+  current="proyectos"
+  path={`/proyectos/${slug}/`}
+>
+  <div class="ficha-header">
+    <p><a href={getRelativeLocaleUrl(lang, '/proyectos/')}>{t(lang, 'back_to_proyectos')}</a></p>
+    <h1>{entry.data.title}</h1>
+    <p class="meta">
+      {entry.data.location}
+      {entry.data.location && year && ' · '}
+      {year}
+    </p>
+  </div>
+
+  {
+    cover && (
+      <div class="ficha-cover">
+        <img src={`${base}${cover.replace(/^\//, '')}`} alt={entry.data.title} loading="eager" />
+      </div>
+    )
+  }
+
+  <div class="prose">
+    <Content />
+  </div>
+
+  {entry.data.audio && <AudioEmbed lang={lang} audio={entry.data.audio} />}
+
+  {
+    entry.data.germanNote && (
+      <div class="prose" style="color: var(--color-muted); font-size: 0.95rem; border-top: 1px solid var(--color-border); padding-top: 1rem; white-space: pre-line;">
+        {entry.data.germanNote}
+      </div>
+    )
+  }
+
+  {rest.length > 0 && <Gallery images={rest} alt={entry.data.title} />}
+</Layout>

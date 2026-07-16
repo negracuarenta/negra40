@@ -1,0 +1,30 @@
+---
+import { getEntry } from 'astro:content';
+import Layout from '../../components/Layout.astro';
+import { t } from '../../i18n/ui';
+
+const page = await getEntry('textos', 'es');
+const items = page!.data.items;
+---
+
+<Layout lang="es" title={t('es', 'nav_textos')} current="textos" path="/textos/">
+  <div class="prose" style="margin-top: 3rem;">
+    <h1>{t('es', 'nav_textos')}</h1>
+  </div>
+  <ul class="list-simple">
+    {
+      items.map((item) => (
+        <li>
+          <span class="item-title">{item.title}</span>
+          <span class="item-meta">
+            {item.author && <>{t('es', 'by')} {item.author}</>}
+            {item.note && <> — {item.note}</>}
+          </span>
+          <a href={item.pdfUrl} target="_blank" rel="noopener noreferrer">
+            {t('es', 'download_pdf')} →
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

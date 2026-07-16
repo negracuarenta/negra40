@@ -1,0 +1,22 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# macOS
+.DS_Store
+
+# raw scraped source (superseded by src/content/ + public/images), kept locally only
+negra40-contenido/
+negra40-imagenes-*.zip
+negra40-test.zip
+CENA_Extracto.mp3

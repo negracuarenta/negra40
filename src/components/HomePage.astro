@@ -1,0 +1,39 @@
+---
+import { getEntry, render } from 'astro:content';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Layout from './Layout.astro';
+import ProjectCard from './ProjectCard.astro';
+import { t, type Lang } from '../i18n/ui';
+import { getProyectos } from '../lib/proyectos';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const page = await getEntry('paginas', `${lang}/inicio`);
+const { Content } = await render(page!);
+const proyectos = await getProyectos(lang);
+const featured = proyectos.slice(0, 6);
+---
+
+<Layout lang={lang} title="negra40" current="home" path="/">
+  <section class="hero">
+    <div class="container">
+      <h1>negra 40</h1>
+      <div class="subtitle">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <div class="container-wide">
+    <h2 style="padding-inline: 1rem;">{t(lang, 'nav_proyectos')}</h2>
+  </div>
+  <div class="featured-grid">
+    {featured.map((entry) => <ProjectCard lang={lang} entry={entry} />)}
+  </div>
+  <p style="text-align:center; padding: 2rem;">
+    <a class="button" href={getRelativeLocaleUrl(lang, '/proyectos/')}>{t(lang, 'read_more')}</a>
+  </p>
+</Layout>

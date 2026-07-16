@@ -1,0 +1,42 @@
+---
+interface Props {
+  images: string[];
+  alt: string;
+}
+
+const { images, alt } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const id = `lightbox-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+{
+  images.length > 0 && (
+    <div class="gallery">
+      {images.map((src, i) => (
+        <button type="button" data-full={`${base}${src.replace(/^\//, '')}`} data-lightbox={id}>
+          <img src={`${base}${src.replace(/^\//, '')}`} alt={`${alt} ${i + 1}`} loading="lazy" />
+        </button>
+      ))}
+      <dialog class="lightbox" id={id}>
+        <img src="" alt={alt} />
+      </dialog>
+    </div>
+  )
+}
+
+<script>
+  for (const dialog of document.querySelectorAll<HTMLDialogElement>('dialog.lightbox')) {
+    dialog.addEventListener('click', () => dialog.close());
+  }
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.gallery button[data-lightbox]')) {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.lightbox;
+      const dialog = document.getElementById(id!) as HTMLDialogElement | null;
+      const img = dialog?.querySelector('img');
+      if (dialog && img) {
+        img.setAttribute('src', btn.dataset.full ?? '');
+        dialog.showModal();
+      }
+    });
+  }
+</script>

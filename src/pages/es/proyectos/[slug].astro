@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import ProyectoFicha from '../../../components/ProyectoFicha.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('proyectos', (entry) => entry.slug.startsWith('es/'));
+  return entries.map((entry) => ({
+    params: { slug: entry.slug.replace(/^es\//, '') },
+  }));
+}
+
+const { slug } = Astro.params;
+---
+
+<ProyectoFicha lang="es" slug={slug} />

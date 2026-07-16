@@ -1,0 +1,51 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Nav from './Nav.astro';
+import LangSwitch from './LangSwitch.astro';
+import Footer from './Footer.astro';
+import { t, type Lang } from '../i18n/ui';
+import '../styles/global.css';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description?: string;
+  current: 'home' | 'negra40' | 'proyectos' | 'textos' | 'links' | 'contacto';
+  /** Path after the locale prefix, used by the language switcher. */
+  path: string;
+}
+
+const { lang, title, description, current, path } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const siteTitle = title === 'negra40' ? title : `${title} — negra40`;
+---
+
+<!doctype html>
+<html lang={lang} data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{siteTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" type="image/png" href={`${base}logos/favicon-mono.png`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-header__logo" href={getRelativeLocaleUrl(lang, '/')} aria-label={t(lang, 'nav_home')}>
+        <img src={`${base}logos/logo-horizontal.png`} alt="negra40" />
+      </a>
+      <Nav lang={lang} current={current} />
+      <LangSwitch lang={lang} path={path} />
+    </header>
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

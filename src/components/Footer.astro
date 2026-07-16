@@ -1,0 +1,35 @@
+---
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const year = new Date().getFullYear();
+
+// TODO: reemplazar por las URLs reales de Facebook / Instagram / Vimeo de negra40.
+// El scrape del sitio viejo solo capturó el texto de estos links, no el href.
+const socials = [
+  { label: 'Facebook', href: '#' },
+  { label: 'Instagram', href: '#' },
+  { label: 'Vimeo', href: '#' },
+];
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p>© {year} negra40 — {t(lang, 'footer_rights')}</p>
+    <ul class="social-icons">
+      {
+        socials.map((s) => (
+          <li>
+            <a href={s.href} target="_blank" rel="noopener noreferrer">
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

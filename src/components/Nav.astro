@@ -1,0 +1,36 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  current: 'home' | 'negra40' | 'proyectos' | 'textos' | 'links' | 'contacto';
+}
+
+const { lang, current } = Astro.props;
+
+const items = [
+  { key: 'negra40', slug: '/negra-40/', label: t(lang, 'nav_home') },
+  { key: 'proyectos', slug: '/proyectos/', label: t(lang, 'nav_proyectos') },
+  { key: 'textos', slug: '/textos/', label: t(lang, 'nav_textos') },
+  { key: 'links', slug: '/links/', label: t(lang, 'nav_links') },
+  { key: 'contacto', slug: '/contacto/', label: t(lang, 'nav_contacto') },
+] as const;
+---
+
+<nav class="site-nav" aria-label="Main navigation">
+  <ul>
+    {
+      items.map((item) => (
+        <li>
+          <a
+            href={getRelativeLocaleUrl(lang, item.slug)}
+            aria-current={current === item.key ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

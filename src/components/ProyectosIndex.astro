@@ -1,0 +1,50 @@
+---
+import Layout from './Layout.astro';
+import ProjectCard from './ProjectCard.astro';
+import { t, type Lang } from '../i18n/ui';
+import { getProyectos } from '../lib/proyectos';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const proyectos = await getProyectos(lang);
+const years = [...new Set(proyectos.map((p) => (p.data.date ? new Date(p.data.date).getFullYear() : null)).filter((y): y is number => y !== null))].sort((a, b) => b - a);
+---
+
+<Layout lang={lang} title={t(lang, 'nav_proyectos')} current="proyectos" path="/proyectos/">
+  <div class="prose" style="margin-top: 3rem;">
+    <h1>{t(lang, 'nav_proyectos')}</h1>
+  </div>
+  <div class="proyectos-toolbar">
+    <input type="search" id="proyectos-search" placeholder={t(lang, 'search_placeholder')} />
+    <select id="proyectos-year">
+      <option value="">{t(lang, 'filter_all_years')}</option>
+      {years.map((y) => <option value={y}>{y}</option>)}
+    </select>
+  </div>
+  <div class="featured-grid" id="proyectos-grid">
+    {proyectos.map((entry) => <ProjectCard lang={lang} entry={entry} />)}
+  </div>
+</Layout>
+
+<script>
+  const search = document.getElementById('proyectos-search') as HTMLInputElement;
+  const yearSelect = document.getElementById('proyectos-year') as HTMLSelectElement;
+  const grid = document.getElementById('proyectos-grid');
+  const cards = Array.from(grid?.querySelectorAll<HTMLElement>('.card') ?? []);
+
+  function applyFilter() {
+    const query = search.value.trim().toLowerCase();
+    const year = yearSelect.value;
+    for (const card of cards) {
+      const matchesQuery = !query || card.dataset.title?.includes(query);
+      const matchesYear = !year || card.dataset.year === year;
+      card.style.display = matchesQuery && matchesYear ? '' : 'none';
+    }
+  }
+
+  search?.addEventListener('input', applyFilter);
+  yearSelect?.addEventListener('change', applyFilter);
+</script>
