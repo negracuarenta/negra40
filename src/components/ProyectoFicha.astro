@@ -5,6 +5,7 @@ import Layout from './Layout.astro';
 import Gallery from './Gallery.astro';
 import AudioEmbed from './AudioEmbed.astro';
 import { t, type Lang } from '../i18n/ui';
+import { withBase } from '../lib/paths';
 
 interface Props {
   lang: Lang;
@@ -15,7 +16,6 @@ const { lang, slug } = Astro.props;
 const entry = await getEntry('proyectos', `${lang}/${slug}`);
 if (!entry) throw new Error(`Proyecto not found: ${lang}/${slug}`);
 const { Content } = await render(entry);
-const base = import.meta.env.BASE_URL;
 const year = entry.data.date ? new Date(entry.data.date).getFullYear() : null;
 const [cover, ...rest] = entry.data.images;
 ---
@@ -40,7 +40,7 @@ const [cover, ...rest] = entry.data.images;
   {
     cover && (
       <div class="ficha-cover">
-        <img src={`${base}${cover.replace(/^\//, '')}`} alt={entry.data.title} loading="eager" />
+        <img src={withBase(cover)} alt={entry.data.title} loading="eager" />
       </div>
     )
   }

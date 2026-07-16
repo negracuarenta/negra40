@@ -3,6 +3,7 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import type { CollectionEntry } from 'astro:content';
 import type { Lang } from '../i18n/ui';
 import { slugOf } from '../lib/proyectos';
+import { withBase } from '../lib/paths';
 
 interface Props {
   lang: Lang;
@@ -10,14 +11,13 @@ interface Props {
 }
 
 const { lang, entry } = Astro.props;
-const base = import.meta.env.BASE_URL;
 const cover = entry.data.images[0];
 const year = entry.data.date ? new Date(entry.data.date).getFullYear() : null;
 const slug = slugOf(entry);
 ---
 
 <a class="card" href={getRelativeLocaleUrl(lang, `/proyectos/${slug}/`)} data-title={entry.data.title.toLowerCase()} data-year={year ?? ''}>
-  {cover && <img src={`${base}${cover.replace(/^\//, '')}`} alt={entry.data.title} loading="lazy" />}
+  {cover && <img src={withBase(cover)} alt={entry.data.title} loading="lazy" />}
   {year && <span class="card-year">{year}</span>}
   <h3>{entry.data.title}</h3>
 </a>

@@ -1,11 +1,12 @@
 ---
+import { withBase } from '../lib/paths';
+
 interface Props {
   images: string[];
   alt: string;
 }
 
 const { images, alt } = Astro.props;
-const base = import.meta.env.BASE_URL;
 const id = `lightbox-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
@@ -13,8 +14,8 @@ const id = `lightbox-${Math.random().toString(36).slice(2, 9)}`;
   images.length > 0 && (
     <div class="gallery">
       {images.map((src, i) => (
-        <button type="button" data-full={`${base}${src.replace(/^\//, '')}`} data-lightbox={id}>
-          <img src={`${base}${src.replace(/^\//, '')}`} alt={`${alt} ${i + 1}`} loading="lazy" />
+        <button type="button" data-full={withBase(src)} data-lightbox={id}>
+          <img src={withBase(src)} alt={`${alt} ${i + 1}`} loading="lazy" />
         </button>
       ))}
       <dialog class="lightbox" id={id}>
