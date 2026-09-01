@@ -16,8 +16,17 @@ const { lang, slug } = Astro.props;
 const entry = await getEntry('proyectos', `${lang}/${slug}`);
 if (!entry) throw new Error(`Proyecto not found: ${lang}/${slug}`);
 const { Content } = await render(entry);
-const year = entry.data.date ? new Date(entry.data.date).getFullYear() : null;
 const [cover, ...rest] = entry.data.images;
+
+const agendaLabels =
+  lang === 'en' ? { date: 'Date', place: 'Place' } : { date: 'Fecha', place: 'Lugar' };
+const dateLabel = entry.data.date
+  ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(entry.data.date)
+  : null;
 ---
 
 <Layout
@@ -30,12 +39,26 @@ const [cover, ...rest] = entry.data.images;
   <div class="ficha-header">
     <p><a href={getRelativeLocaleUrl(lang, '/proyectos/')}>{t(lang, 'back_to_proyectos')}</a></p>
     <h1>{entry.data.title}</h1>
-    <p class="meta">
-      {entry.data.location}
-      {entry.data.location && year && ' · '}
-      {year}
-    </p>
   </div>
+
+  {
+    (dateLabel || entry.data.location) && (
+      <dl class="ficha-agenda">
+        {dateLabel && (
+          <div>
+            <dt>{agendaLabels.date}</dt>
+            <dd>{dateLabel}</dd>
+          </div>
+        )}
+        {entry.data.location && (
+          <div>
+            <dt>{agendaLabels.place}</dt>
+            <dd>{entry.data.location}</dd>
+          </div>
+        )}
+      </dl>
+    )
+  }
 
   {
     cover && (

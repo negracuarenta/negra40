@@ -13,11 +13,18 @@ interface Props {
 const { lang, entry } = Astro.props;
 const cover = entry.data.images[0];
 const year = entry.data.date ? new Date(entry.data.date).getFullYear() : null;
+const dateLabel = entry.data.date
+  ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    }).format(entry.data.date)
+  : null;
 const slug = slugOf(entry);
 ---
 
 <a class="card" href={getRelativeLocaleUrl(lang, `/proyectos/${slug}/`)} data-title={entry.data.title.toLowerCase()} data-year={year ?? ''}>
   {cover && <img src={withBase(cover)} alt={entry.data.title} loading="lazy" />}
-  {year && <span class="card-year">{year}</span>}
+  {dateLabel && <span class="card-date">{dateLabel}</span>}
   <h3>{entry.data.title}</h3>
 </a>
