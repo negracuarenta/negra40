@@ -17,11 +17,23 @@ const { Content } = await render(page!);
 const proyectos = await getProyectos(lang);
 const featured = proyectos.slice(0, 6);
 
-// Imagen del landing: primera imagen del proyecto más reciente del listado ya
-// ordenado. Se resuelve solo cuando cargan un proyecto nuevo. Si ese proyecto
-// no tuviera imágenes, no se renderiza el hero.
+// Imagen del landing: la del proyecto más reciente del listado ya ordenado, así
+// se actualiza sola cuando cargan un proyecto nuevo. Varias fichas arrancan con
+// una imagen cuadrada de afiche, que recortada en panorámico pierde el título:
+// si alguna imagen declara sus medidas en el nombre (patrón de WordPress, p. ej.
+// "…-1024x614.webp"), se prefiere la primera apaisada; si no, se descartan las
+// marcadas como cuadradas ("1x1") y se cae a la primera de la lista.
+function pickHeroImage(images: string[]): string | null {
+  const measured = images
+    .map((src) => ({ src, size: /-(\d+)x(\d+)\.[a-z0-9]+$/i.exec(src) }))
+    .filter((i) => i.size);
+  const landscape = measured.find((i) => Number(i.size![1]) > Number(i.size![2]));
+  if (landscape) return landscape.src;
+  return images.find((src) => !/[_-]1x1[._-]/i.test(src)) ?? images[0] ?? null;
+}
+
 const latest = proyectos[0];
-const heroImage = latest?.data.images[0] ?? null;
+const heroImage = latest ? pickHeroImage(latest.data.images) : null;
 const heroDate = latest?.data.date
   ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', {
       day: 'numeric',

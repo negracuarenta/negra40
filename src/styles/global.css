@@ -541,7 +541,8 @@ button:focus-visible {
 
 .home-hero img {
   width: 100%;
-  height: clamp(320px, 68vh, 760px);
+  aspect-ratio: 16 / 9;
+  max-height: 72vh;
   object-fit: cover;
   background: var(--color-border);
   transition: opacity var(--ease-dur) var(--ease);
