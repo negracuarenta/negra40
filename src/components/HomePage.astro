@@ -4,7 +4,8 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import Layout from './Layout.astro';
 import ProjectCard from './ProjectCard.astro';
 import { t, type Lang } from '../i18n/ui';
-import { getProyectos } from '../lib/proyectos';
+import { getProyectos, slugOf } from '../lib/proyectos';
+import { withBase } from '../lib/paths';
 
 interface Props {
   lang: Lang;
@@ -15,6 +16,19 @@ const page = await getEntry('paginas', `${lang}/inicio`);
 const { Content } = await render(page!);
 const proyectos = await getProyectos(lang);
 const featured = proyectos.slice(0, 6);
+
+// Imagen del landing: primera imagen del proyecto más reciente del listado ya
+// ordenado. Se resuelve solo cuando cargan un proyecto nuevo. Si ese proyecto
+// no tuviera imágenes, no se renderiza el hero.
+const latest = proyectos[0];
+const heroImage = latest?.data.images[0] ?? null;
+const heroDate = latest?.data.date
+  ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(latest.data.date)
+  : null;
 ---
 
 <Layout lang={lang} title="negra40" current="home" path="/">
@@ -27,6 +41,18 @@ const featured = proyectos.slice(0, 6);
     </div>
   </section>
 
+  {
+    heroImage && latest && (
+      <a class="home-hero" href={getRelativeLocaleUrl(lang, `/proyectos/${slugOf(latest)}/`)}>
+        <img src={withBase(heroImage)} alt={latest.data.title} loading="eager" />
+        <span class="home-hero__caption">
+          {heroDate && <span class="home-hero__date">{heroDate}</span>}
+          <span class="home-hero__title">{latest.data.title}</span>
+        </span>
+      </a>
+    )
+  }
+
   <div class="container-wide">
     <h2 style="padding-inline: 1rem;">{t(lang, 'nav_proyectos')}</h2>
   </div>
@@ -34,6 +60,6 @@ const featured = proyectos.slice(0, 6);
     {featured.map((entry) => <ProjectCard lang={lang} entry={entry} />)}
   </div>
   <p style="text-align:center; padding: 2rem;">
-    <a class="button" href={getRelativeLocaleUrl(lang, '/proyectos/')}>{t(lang, 'read_more')}</a>
+    <a class="btn" href={getRelativeLocaleUrl(lang, '/proyectos/')}>{t(lang, 'read_more')}</a>
   </p>
 </Layout>

@@ -11,6 +11,8 @@
   --space-3: 2rem;
   --space-4: 4rem;
   --space-5: 6rem;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --ease-dur: 180ms;
 }
 
 :root[data-theme='dark'] {
@@ -144,23 +146,8 @@ nav.site-nav ul {
 }
 
 nav.site-nav a {
-  text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
-}
-
-nav.site-nav a[aria-current='page'] {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.lang-switch a {
-  text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  padding: 0.25rem 0.75rem;
 }
 
 .site-footer {
@@ -255,6 +242,15 @@ main {
   font-weight: 800;
   letter-spacing: -0.01em;
   margin: 0.1rem 0 0;
+}
+
+.card img {
+  transition: opacity var(--ease-dur) var(--ease);
+}
+
+.card:hover img,
+.card:focus-visible img {
+  opacity: 0.85;
 }
 
 .proyectos-toolbar {
@@ -421,15 +417,6 @@ dialog.lightbox::backdrop {
   border: 0;
 }
 
-.audio-embed .external-link {
-  display: inline-block;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
-  padding: 0.6rem 1.25rem;
-  text-decoration: none;
-  font-weight: 600;
-}
-
 .list-simple {
   list-style: none;
   margin: 0;
@@ -463,13 +450,146 @@ dialog.lightbox::backdrop {
   margin: var(--space-3) 0;
 }
 
-.button {
-  display: inline-block;
+/* ---------------------------------------------------------------
+   Sistema de elementos interactivos
+   .btn   → pill de acción; en hover invierte a fondo negro / texto blanco
+   .link  → link de texto; en hover aparece el subrayado
+   Definidos una sola vez acá y reutilizados en todos los componentes.
+   --------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  color: var(--color-fg);
+  background: transparent;
   border: 1px solid var(--color-fg);
   border-radius: 999px;
-  padding: 0.75rem 1.5rem;
+  padding: 0.9rem 1.6rem;
+  cursor: pointer;
+  transition:
+    background-color var(--ease-dur) var(--ease),
+    color var(--ease-dur) var(--ease),
+    border-color var(--ease-dur) var(--ease);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--color-fg);
+  color: var(--color-bg);
+  border-color: var(--color-fg);
+}
+
+/* Variante compacta: selector de idioma, pills dentro del cuerpo de texto. */
+.btn--sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+}
+
+.link,
+nav.site-nav a,
+.card h3 {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--ease-dur) var(--ease);
+}
+
+.link {
+  color: inherit;
+}
+
+.link:hover,
+.link:focus-visible,
+nav.site-nav a:hover,
+nav.site-nav a:focus-visible,
+nav.site-nav a[aria-current='page'],
+.card:hover h3,
+.card:focus-visible h3 {
+  text-decoration-color: currentColor;
+}
+
+/* Micro-tipografía editorial para links de servicio ("← Volver a Proyectos"). */
+.link--meta {
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 800;
+  font-size: 0.75rem;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-fg);
+  outline-offset: 3px;
+}
+
+/* Imagen grande del landing: proyecto más reciente, a todo el ancho. */
+.home-hero {
+  display: block;
+  color: inherit;
   text-decoration: none;
-  font-weight: 600;
+  margin: var(--space-3) 0 var(--space-5);
+}
+
+.home-hero img {
+  width: 100%;
+  height: clamp(320px, 68vh, 760px);
+  object-fit: cover;
+  background: var(--color-border);
+  transition: opacity var(--ease-dur) var(--ease);
+}
+
+.home-hero:hover img,
+.home-hero:focus-visible img {
+  opacity: 0.85;
+}
+
+.home-hero__caption {
+  max-width: var(--wide);
+  margin-inline: auto;
+  padding: var(--space-2) var(--space-2) 0;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.home-hero__caption .home-hero__date {
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.home-hero__caption .home-hero__title {
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--ease-dur) var(--ease);
+}
+
+.home-hero:hover .home-hero__title,
+.home-hero:focus-visible .home-hero__title {
+  text-decoration-color: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (max-width: 640px) {
