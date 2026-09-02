@@ -39,10 +39,11 @@ const slides = files.length
       {slides.map((slide, i) => (
         <img
           class:list={['hero-slideshow__slide', i === 0 && 'is-active']}
-          src={slide.src}
+          src={i === 0 ? slide.src : undefined}
+          data-src={i === 0 ? undefined : slide.src}
           alt={slide.alt}
-          loading={i === 0 ? 'eager' : 'lazy'}
-          decoding={i === 0 ? 'sync' : 'async'}
+          loading="eager"
+          decoding="async"
         />
       ))}
     </div>
@@ -54,17 +55,38 @@ const slides = files.length
   // Quien pidió menos movimiento en el sistema se queda con la primera foto.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Solo la primera foto trae `src` en el HTML; las demás llegan con `data-src`
+  // y se piden desde acá, un par de slides por delante de la que se ve. Así el
+  // landing no arranca descargando todas las fotos de golpe, y a la vez ninguna
+  // depende de `loading="lazy"`, que no las traía por estar apiladas y en
+  // opacidad 0 (la rotación pasaba a imágenes vacías).
+  function hydrate(slide: HTMLImageElement | undefined) {
+    if (!slide) return;
+    const src = slide.dataset.src;
+    if (!src) return;
+    slide.src = src;
+    delete slide.dataset.src;
+  }
+
   for (const box of document.querySelectorAll<HTMLElement>('.hero-slideshow')) {
-    const slides = Array.from(box.querySelectorAll<HTMLElement>('.hero-slideshow__slide'));
+    const slides = Array.from(box.querySelectorAll<HTMLImageElement>('.hero-slideshow__slide'));
     if (reduced || slides.length < 2) continue;
 
     const interval = Number(box.dataset.interval) || 4500;
     let current = 0;
 
+    const preloadAhead = () => {
+      hydrate(slides[(current + 1) % slides.length]);
+      hydrate(slides[(current + 2) % slides.length]);
+    };
+
+    preloadAhead();
+
     setInterval(() => {
       slides[current].classList.remove('is-active');
       current = (current + 1) % slides.length;
       slides[current].classList.add('is-active');
+      preloadAhead();
     }, interval);
   }
 </script>
