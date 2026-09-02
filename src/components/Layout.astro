@@ -31,14 +31,14 @@ const siteTitle = title === 'negra40' ? title : `${title} — negra40`;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Sora:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <header class="site-header">
       <a class="site-header__logo" href={getRelativeLocaleUrl(lang, '/')} aria-label={t(lang, 'nav_home')}>
-        <img src={withBase('logos/logo-horizontal.png')} alt="negra40" />
+        <img class="site-header__icon" src={withBase('logos/favicon-mono.png')} alt="negra40" />
       </a>
       <Nav lang={lang} current={current} />
       <LangSwitch lang={lang} path={path} />

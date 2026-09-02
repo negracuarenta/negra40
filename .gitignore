@@ -17,6 +17,8 @@ npm-debug.log*
 
 # raw scraped source (superseded by src/content/ + public/images), kept locally only
 negra40-contenido/
+# originales pesados del slideshow (las versiones optimizadas viven en public/landing/)
+/landing/
 negra40-imagenes-*.zip
 negra40-test.zip
 /CENA_Extracto.mp3

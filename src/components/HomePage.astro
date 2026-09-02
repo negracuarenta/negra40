@@ -3,9 +3,9 @@ import { getEntry, render } from 'astro:content';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import Layout from './Layout.astro';
 import ProjectCard from './ProjectCard.astro';
+import HeroSlideshow from './HeroSlideshow.astro';
 import { t, type Lang } from '../i18n/ui';
-import { getProyectos, slugOf } from '../lib/proyectos';
-import { withBase } from '../lib/paths';
+import { getProyectos } from '../lib/proyectos';
 
 interface Props {
   lang: Lang;
@@ -17,12 +17,13 @@ const { Content } = await render(page!);
 const proyectos = await getProyectos(lang);
 const featured = proyectos.slice(0, 6);
 
-// Imagen del landing: la del proyecto más reciente del listado ya ordenado, así
-// se actualiza sola cuando cargan un proyecto nuevo. Varias fichas arrancan con
-// una imagen cuadrada de afiche, que recortada en panorámico pierde el título:
-// si alguna imagen declara sus medidas en el nombre (patrón de WordPress, p. ej.
-// "…-1024x614.webp"), se prefiere la primera apaisada; si no, se descartan las
-// marcadas como cuadradas ("1x1") y se cae a la primera de la lista.
+// Fallback del slideshow: si todavía no hay fotos en public/landing/, se usa la
+// imagen del proyecto más reciente, así el landing nunca queda sin imagen.
+// Varias fichas arrancan con una imagen cuadrada de afiche, que recortada en
+// panorámico pierde el título: si alguna imagen declara sus medidas en el
+// nombre (patrón de WordPress, p. ej. "…-1024x614.webp"), se prefiere la
+// primera apaisada; si no, se descartan las marcadas como cuadradas ("1x1") y
+// se cae a la primera de la lista.
 function pickHeroImage(images: string[]): string | null {
   const measured = images
     .map((src) => ({ src, size: /-(\d+)x(\d+)\.[a-z0-9]+$/i.exec(src) }))
@@ -34,13 +35,6 @@ function pickHeroImage(images: string[]): string | null {
 
 const latest = proyectos[0];
 const heroImage = latest ? pickHeroImage(latest.data.images) : null;
-const heroDate = latest?.data.date
-  ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    }).format(latest.data.date)
-  : null;
 ---
 
 <Layout lang={lang} title="negra40" current="home" path="/">
@@ -53,17 +47,7 @@ const heroDate = latest?.data.date
     </div>
   </section>
 
-  {
-    heroImage && latest && (
-      <a class="home-hero" href={getRelativeLocaleUrl(lang, `/proyectos/${slugOf(latest)}/`)}>
-        <img src={withBase(heroImage)} alt={latest.data.title} loading="eager" />
-        <span class="home-hero__caption">
-          {heroDate && <span class="home-hero__date">{heroDate}</span>}
-          <span class="home-hero__title">{latest.data.title}</span>
-        </span>
-      </a>
-    )
-  }
+  <HeroSlideshow fallback={heroImage} fallbackAlt={latest?.data.title ?? ''} />
 
   <div class="container-wide">
     <h2 style="padding-inline: 1rem;">{t(lang, 'nav_proyectos')}</h2>
