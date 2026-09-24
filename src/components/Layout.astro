@@ -38,7 +38,7 @@ const siteTitle = title === 'negra40' ? title : `${title} — negra40`;
   <body>
     <header class="site-header">
       <a class="site-header__logo" href={getRelativeLocaleUrl(lang, '/')} aria-label={t(lang, 'nav_home')}>
-        <img class="site-header__icon" src={withBase('logos/favicon-mono.png')} alt="negra40" />
+        <img src={withBase('logos/logo-horizontal.png')} alt="negra40" />
       </a>
       <Nav lang={lang} current={current} />
       <LangSwitch lang={lang} path={path} />

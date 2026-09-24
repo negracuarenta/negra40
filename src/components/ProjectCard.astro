@@ -24,7 +24,13 @@ const slug = slugOf(entry);
 ---
 
 <a class="card" href={getRelativeLocaleUrl(lang, `/proyectos/${slug}/`)} data-title={entry.data.title.toLowerCase()} data-year={year ?? ''}>
-  {cover && <img src={withBase(cover)} alt={entry.data.title} loading="lazy" />}
+  {
+    cover && (
+      <span class="card__frame">
+        <img src={withBase(cover)} alt={entry.data.title} loading="lazy" />
+      </span>
+    )
+  }
   {dateLabel && <span class="card-date">{dateLabel}</span>}
   <h3>{entry.data.title}</h3>
 </a>

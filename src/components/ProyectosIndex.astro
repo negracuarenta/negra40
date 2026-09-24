@@ -14,9 +14,9 @@ const years = [...new Set(proyectos.map((p) => (p.data.date ? new Date(p.data.da
 ---
 
 <Layout lang={lang} title={t(lang, 'nav_proyectos')} current="proyectos" path="/proyectos/">
-  <div class="prose" style="margin-top: 3rem;">
+  <section class="section page-head">
     <h1>{t(lang, 'nav_proyectos')}</h1>
-  </div>
+  </section>
   <div class="proyectos-toolbar">
     <input type="search" id="proyectos-search" placeholder={t(lang, 'search_placeholder')} />
     <select id="proyectos-year">
@@ -24,9 +24,11 @@ const years = [...new Set(proyectos.map((p) => (p.data.date ? new Date(p.data.da
       {years.map((y) => <option value={y}>{y}</option>)}
     </select>
   </div>
-  <div class="featured-grid" id="proyectos-grid">
-    {proyectos.map((entry) => <ProjectCard lang={lang} entry={entry} />)}
-  </div>
+  <section class="section">
+    <div class="featured-grid" id="proyectos-grid">
+      {proyectos.map((entry) => <ProjectCard lang={lang} entry={entry} />)}
+    </div>
+  </section>
 </Layout>
 
 <script>

@@ -38,24 +38,25 @@ const heroImage = latest ? pickHeroImage(latest.data.images) : null;
 ---
 
 <Layout lang={lang} title="negra40" current="home" path="/">
-  <section class="hero">
-    <div class="container">
-      <h1>negra 40</h1>
-      <div class="subtitle">
-        <Content />
-      </div>
-    </div>
-  </section>
+  {/* El nombre lo dice el isologo del header; acá queda solo para lectores de
+      pantalla y buscadores, que necesitan un h1 en la página. */}
+  <h1 class="visually-hidden">negra 40</h1>
 
   <HeroSlideshow fallback={heroImage} fallbackAlt={latest?.data.title ?? ''} />
 
-  <div class="container-wide">
-    <h2 style="padding-inline: 1rem;">{t(lang, 'nav_proyectos')}</h2>
-  </div>
-  <div class="featured-grid">
-    {featured.map((entry) => <ProjectCard lang={lang} entry={entry} />)}
-  </div>
-  <p style="text-align:center; padding: 2rem;">
-    <a class="btn" href={getRelativeLocaleUrl(lang, '/proyectos/')}>{t(lang, 'read_more')}</a>
-  </p>
+  <section class="intro">
+    <div class="intro__text">
+      <Content />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section__title">{t(lang, 'nav_proyectos')}</h2>
+    <div class="featured-grid">
+      {featured.map((entry) => <ProjectCard lang={lang} entry={entry} />)}
+    </div>
+    <p class="section__cta">
+      <a class="btn" href={getRelativeLocaleUrl(lang, '/proyectos/')}>{t(lang, 'read_more')}</a>
+    </p>
+  </section>
 </Layout>
