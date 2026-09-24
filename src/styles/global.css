@@ -3,6 +3,8 @@
   --color-fg: #111111;
   --color-muted: #6b6b6b;
   --color-border: #e4e4e4;
+  /* Fondo de paspartú: lo que se ve detrás de un afiche que no llena la caja. */
+  --color-mat: #f3f2f0;
   --font-sans: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   /* Serif editorial para los títulos: el contraste con la sans del cuerpo es
      parte del efecto (referencia: catálogos de museo tipo moma.org). */
@@ -138,7 +140,7 @@ p {
 }
 
 .site-header__logo img {
-  height: 24px;
+  height: 28px;
   width: auto;
 }
 
@@ -289,8 +291,19 @@ main {
   position: relative;
   overflow: hidden;
   aspect-ratio: 1 / 1;
-  background: var(--color-border);
+  background: var(--color-mat);
   margin-bottom: var(--space-2);
+}
+
+/* El filete va encima de la imagen, así también encuadra a los afiches sobre
+   fondo blanco, que sin borde se disuelven contra la página. */
+.card__frame::after,
+.gallery button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
 }
 
 .card img {
@@ -341,12 +354,24 @@ main {
 .proyectos-toolbar input,
 .proyectos-toolbar select {
   font-family: inherit;
-  font-size: 1rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  background: var(--color-bg);
+  font-size: 0.95rem;
+  padding: 0.7rem 0.2rem;
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  background: transparent;
   color: var(--color-fg);
+  transition: border-color var(--ease-dur) var(--ease);
+}
+
+.proyectos-toolbar input:focus,
+.proyectos-toolbar select:focus {
+  outline: none;
+  border-bottom-color: var(--color-fg);
+}
+
+.proyectos-toolbar input::placeholder {
+  color: var(--color-muted);
 }
 
 .proyectos-toolbar input {
@@ -393,17 +418,24 @@ main {
   font-size: 1.05rem;
 }
 
+/* Banda panorámica, pero con la imagen contenida en vez de recortada: las
+   fotos apaisadas la llenan de punta a punta y los afiches cuadrados quedan
+   centrados y completos sobre el paspartú. Nunca se corta nada. */
 .ficha-cover {
-  max-width: var(--wide);
-  margin: 0 auto var(--space-3);
-  padding-inline: var(--space-2);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 78vh;
+  margin: 0 0 var(--space-4);
+  background: var(--color-mat);
+  overflow: hidden;
 }
 
 .ficha-cover img {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  background: var(--color-border);
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .prose {
@@ -438,25 +470,34 @@ main {
 
 .gallery {
   max-width: var(--wide);
-  margin: var(--space-3) auto var(--space-4);
-  padding-inline: var(--space-2);
+  margin: var(--space-4) auto var(--space-5);
+  padding-inline: var(--gutter);
   display: grid;
   gap: var(--space-1);
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
 }
 
 .gallery button {
+  position: relative;
   border: 0;
   padding: 0;
-  background: none;
+  background: var(--color-mat);
   cursor: zoom-in;
   display: block;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
 }
 
 .gallery img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   object-fit: cover;
+  transition: transform 700ms var(--ease);
+}
+
+.gallery button:hover img,
+.gallery button:focus-visible img {
+  transform: scale(1.04);
 }
 
 dialog.lightbox {
