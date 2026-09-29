@@ -4,7 +4,7 @@ items:
   - title: "Maradona and Music: Soundscapes and Echoes of the Maradonian Song"
     author: "Martín Virgili"
     note: "Chapter 8 of Diego Maradona: A Socio-Cultural Study, ed. Pablo Brescia and Mariano Paz, Routledge, London and New York, 2023. Translated by Dolores Gadler"
-    pdfUrl: "https://drive.google.com/file/d/1UtwYJiyvc4-UskV32Pw8aYG842OwS0pS/view?usp=sharing"
+    pdfUrl: "/textos/maradona-and-music-virgili.pdf"
   - title: "Listening to the Sea"
     author: "Martín Virgili"
     note: "Mar del Plata, December 2019"

@@ -2,6 +2,7 @@
 import { getEntry } from 'astro:content';
 import Layout from '../../components/Layout.astro';
 import { t } from '../../i18n/ui';
+import { withBase } from '../../lib/paths';
 
 const page = await getEntry('textos', 'en');
 const items = page!.data.items;
@@ -20,7 +21,7 @@ const items = page!.data.items;
             {item.author && <>{t('en', 'by')}{' '}{item.author}</>}
             {item.note && <> — {item.note}</>}
           </span>
-          <a href={item.pdfUrl} target="_blank" rel="noopener noreferrer">
+          <a href={item.pdfUrl.startsWith('http') ? item.pdfUrl : withBase(item.pdfUrl)} target="_blank" rel="noopener noreferrer">
             {t('en', 'download_pdf')} →
           </a>
         </li>
