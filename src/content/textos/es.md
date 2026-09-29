@@ -3,6 +3,7 @@ title: "Textos"
 items:
   - title: "Maradona y la música: Paisaje sonoro y ecos en la canción maradoniana"
     author: "Martín Virgili"
+    note: "Publicado en inglés como capítulo 8 de Diego Maradona: A Socio-Cultural Study, ed. Pablo Brescia y Mariano Paz, Routledge. Traducción: Dolores Gadler"
     pdfUrl: "https://drive.google.com/file/d/1PPvUfuflp4db0wbBuM056ZrivQ6tHPbP/view?usp=sharing"
   - title: "Escuchar el mar"
     author: "Martín Virgili"
