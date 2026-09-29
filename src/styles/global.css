@@ -237,12 +237,13 @@ main {
   padding-top: var(--space-4);
 }
 
-.page-prose ul {
+.prose.page-prose ul {
   list-style: none;
   padding-left: 0;
+  margin-block: var(--space-2);
 }
 
-.page-prose li {
+.prose.page-prose li {
   margin-bottom: 0.3rem;
 }
 
