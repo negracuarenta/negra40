@@ -1,6 +1,9 @@
 ---
 title: "Textos"
 items:
+  - title: "Maradona y la música: Paisaje sonoro y ecos en la canción maradoniana"
+    author: "Martín Virgili"
+    pdfUrl: "https://drive.google.com/file/d/1PPvUfuflp4db0wbBuM056ZrivQ6tHPbP/view?usp=sharing"
   - title: "Sobre el pacto"
     author: "Martín Virgili"
     pdfUrl: "https://martinvirgili.com.ar/wp/wp-content/uploads/2021/05/Sobre-el-Pacto.pdf"
