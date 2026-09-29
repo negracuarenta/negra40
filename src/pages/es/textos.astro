@@ -17,7 +17,7 @@ const items = page!.data.items;
         <li>
           <span class="item-title">{item.title}</span>
           <span class="item-meta">
-            {item.author && <>{t('es', 'by')} {item.author}</>}
+            {item.author && <>{t('es', 'by')}{' '}{item.author}</>}
             {item.note && <> — {item.note}</>}
           </span>
           <a href={item.pdfUrl} target="_blank" rel="noopener noreferrer">
