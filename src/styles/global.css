@@ -231,6 +231,26 @@ main {
   padding-inline: var(--gutter);
 }
 
+/* Páginas de texto: las listas son nóminas de personas, no enumeraciones.
+   Van sin punteado, como líneas sueltas. */
+.page-prose {
+  padding-top: var(--space-4);
+}
+
+.page-prose ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.page-prose li {
+  margin-bottom: 0.3rem;
+}
+
+/* Sin título visible, el primer apartado no necesita el aire de arriba. */
+.page-prose--sin-titulo h2:first-of-type {
+  margin-top: 0;
+}
+
 .page-head {
   padding-top: var(--space-4);
   padding-bottom: var(--space-3);
