@@ -5,6 +5,10 @@ const proyectos = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date().optional(),
+    // Con qué precisión se conoce la fecha. Sirve para no inventar un día en
+    // fichas que sólo tienen año —un estreno todavía sin fecha cerrada, por
+    // ejemplo—, que hasta ahora se cargaban como 1 de enero y se mostraban así.
+    datePrecision: z.enum(['dia', 'mes', 'anio']).default('dia'),
     // Orden descendente (más reciente primero) para fichas sin fecha explícita clara.
     order: z.number(),
     category: z.enum(['proyecto', 'archivo', 'ensamble']),

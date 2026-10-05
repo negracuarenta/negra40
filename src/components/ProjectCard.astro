@@ -13,12 +13,13 @@ interface Props {
 const { lang, entry } = Astro.props;
 const cover = entry.data.images[0];
 const year = entry.data.date ? new Date(entry.data.date).getFullYear() : null;
+const formatoFecha = {
+  dia: { day: 'numeric', month: 'short', year: 'numeric' },
+  mes: { month: 'short', year: 'numeric' },
+  anio: { year: 'numeric' },
+}[entry.data.datePrecision] as Intl.DateTimeFormatOptions;
 const dateLabel = entry.data.date
-  ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    }).format(entry.data.date)
+  ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', formatoFecha).format(entry.data.date)
   : null;
 const slug = slugOf(entry);
 ---

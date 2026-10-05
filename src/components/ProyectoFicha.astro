@@ -20,12 +20,13 @@ const [cover, ...rest] = entry.data.images;
 
 const agendaLabels =
   lang === 'en' ? { date: 'Date', place: 'Place' } : { date: 'Fecha', place: 'Lugar' };
+const formatoFecha = {
+  dia: { day: 'numeric', month: 'long', year: 'numeric' },
+  mes: { month: 'long', year: 'numeric' },
+  anio: { year: 'numeric' },
+}[entry.data.datePrecision] as Intl.DateTimeFormatOptions;
 const dateLabel = entry.data.date
-  ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    }).format(entry.data.date)
+  ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', formatoFecha).format(entry.data.date)
   : null;
 ---
 
