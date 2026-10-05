@@ -25,6 +25,10 @@ const formatoFecha = {
   mes: { month: 'long', year: 'numeric' },
   anio: { year: 'numeric' },
 }[entry.data.datePrecision] as Intl.DateTimeFormatOptions;
+// Las fechas del contenido no llevan hora: Astro las guarda como medianoche
+// UTC. Sin fijar la zona, formatearlas en un huso negativo las corre un día
+// hacia atrás y el sitio mostraría fechas distintas según dónde se compile.
+formatoFecha.timeZone = 'UTC';
 const dateLabel = entry.data.date
   ? new Intl.DateTimeFormat(lang === 'en' ? 'en-GB' : 'es-ES', formatoFecha).format(entry.data.date)
   : null;
