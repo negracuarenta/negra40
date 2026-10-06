@@ -22,7 +22,7 @@ images:
 ---
 
 **NIDO**
-Acción escénica con música en vivo
+Obra para danza con música en vivo
 
 **Estreno previsto:** 2027, Heidelberg
 
@@ -30,17 +30,25 @@ Un árbol le ofrece refugio a un pájaro. A cambio le pide una sola cosa: que le
 
 ## Sinopsis
 
-NIDO es una acción escénica interdisciplinaria para un bailarín y música en vivo, sobre los ciclos naturales y el imperativo de recuperar la sensibilidad hacia otras formas de estar vivo.
+Nido parte de esa imagen para construir una obra escénica en cinco actos —invierno, primavera, verano, otoño, invierno— en la que, a través de danza y música, escucharemos las noticias del pájaro por el mundo, en un contexto sonoro en constante transformación. Tres músicos en escena construyen ese paisaje en tiempo real, sobre una escenografía de árbol.
 
-La obra se despliega en cuatro actos —invierno, primavera, verano, otoño— en los que un cuerpo en movimiento recorre el ciclo completo de una vida: el sueño, el crecimiento, el caos, el retorno. Tres músicos en escena construyen en tiempo real el paisaje sonoro de ese viaje, sobre una escenografía de árbol.
+La obra surge de una pregunta urgente: ¿cómo recuperar la sensibilidad hacia el mundo natural en un tiempo que parecería haberla perdido? Siguiendo el camino de muchas tradiciones amerindias, Nido busca nuevas metáforas para nombrar nuestra relación con la naturaleza: no desde la nostalgia ni desde la denuncia, sino desde el cuerpo, el sonido y la imagen.
 
 ## El mapa de los vuelos
 
-La golondrina hace tres viajes —al Este, al Sur y al Oeste— y vuelve cada vez al árbol a contarle lo que vio. Esos recorridos se publicaron como un mapa interactivo: treinta y cinco lugares del mundo, cada uno con su ficha, sus fotos y sus fuentes, en castellano, alemán e inglés.
+La golondrina hace tres viajes —al Este, al Sur y al Oeste— y vuelve cada vez al árbol a contarle lo que vio. Esos recorridos se publicaron como un mapa interactivo: cuarenta y cuatro lugares del mundo, cada uno con su ficha, sus fotos y sus fuentes, en castellano, alemán e inglés.
 
 - [Ver el mapa de los vuelos](https://negracuarenta.github.io/nido/)
 
-## Créditos
+## Ficha técnica
 
-- **Proyecto:** Martín Virgili y Juan Corro
+- **Proyecto:** Juan Corro y Martín Virgili
+- **Bailarín y coreografía:** Juan Corro
+- **Música y guión:** Martín Virgili
+- **Asistente de coreografía:** Johana Tocci
+- **Percusión:** Emmanuel Schvabbauer
+- **Recitación y laúd:** Lea Scholz
+- **Violín:** David Jara
+- **Video:** Andrés
+- **Asistencia técnica:** Federico Ehrenbolger
 - **Mapa:** Martín Virgili

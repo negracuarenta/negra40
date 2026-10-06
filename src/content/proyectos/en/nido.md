@@ -22,7 +22,7 @@ images:
 ---
 
 **NIDO**
-A staged action with live music
+A work for dance with live music
 
 **Premiere planned for:** 2027, Heidelberg
 
@@ -30,17 +30,25 @@ A tree offers shelter to a bird. In return it asks for one thing only: that the 
 
 ## Synopsis
 
-NIDO is an interdisciplinary staged action for one dancer and live music, about natural cycles and the urgency of recovering our sensitivity towards other ways of being alive.
+Nido sets out from that image to build a stage work in five acts — winter, spring, summer, autumn, winter — in which, through dance and music, we hear the bird's news of the world, within a soundscape in constant transformation. Three musicians on stage build that landscape in real time, on a set made of tree.
 
-The work unfolds in four acts — winter, spring, summer, autumn — in which a body in movement travels the full cycle of a life: sleep, growth, chaos, return. Three musicians on stage build the soundscape of that journey in real time, on a set made of tree.
+The work springs from an urgent question: how can we recover our sensitivity towards the natural world in a time that seems to have lost it? Following the path of many Amerindian traditions, Nido looks for new metaphors to name our relationship with nature: not out of nostalgia or denunciation, but starting from the body, from sound and from image.
 
 ## The map of the flights
 
-The swallow makes three journeys — East, South and West — and each time returns to the tree to tell what it saw. Those routes have been published as an interactive map: thirty-five places around the world, each with its own page, photographs and sources, in Spanish, German and English.
+The swallow makes three journeys — East, South and West — and each time returns to the tree to tell what it saw. Those routes have been published as an interactive map: forty-four places around the world, each with its own page, photographs and sources, in Spanish, German and English.
 
 - [See the map of the flights](https://negracuarenta.github.io/nido/)
 
 ## Credits
 
-- **Project:** Martín Virgili and Juan Corro
+- **Project:** Juan Corro and Martín Virgili
+- **Dancer and choreography:** Juan Corro
+- **Music and script:** Martín Virgili
+- **Choreography assistant:** Johana Tocci
+- **Percussion:** Emmanuel Schvabbauer
+- **Recitation and lute:** Lea Scholz
+- **Violin:** David Jara
+- **Video:** Andrés
+- **Technical assistance:** Federico Ehrenbolger
 - **Map:** Martín Virgili
