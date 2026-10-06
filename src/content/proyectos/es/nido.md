@@ -5,6 +5,16 @@ datePrecision: anio
 order: 0
 category: proyecto
 location: "Heidelberg, Alemania"
+colaboran:
+  - nombre: "negra40"
+    logo: "negra40.png"
+    url: "https://negracuarenta.github.io/negra40/"
+  - nombre: "CEAC · Centro de Arte y Ciencia, UTN Regional Mar del Plata"
+    logo: "ceac.png"
+    url: "https://ceac.mdp.utn.edu.ar/"
+  - nombre: "Völkerkundemuseum vPST"
+    logo: "vpst.png"
+    url: "https://www.voelkerkundemuseum-vpst.de/"
 images:
   - /images/2027/nido/01-nido-grafica.jpg
   - /images/2027/nido/02-nido-investigacion.jpg

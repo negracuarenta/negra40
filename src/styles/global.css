@@ -731,3 +731,38 @@ button:focus-visible {
     height: min(68svh, 620px);
   }
 }
+
+/* Instituciones que acompañan un proyecto. Las marcas tienen proporciones muy
+   distintas, así que se ajusta cada una hasta que lean parejo. */
+.colaboran {
+  max-width: var(--measure);
+  margin: var(--space-4) auto 0;
+  padding-inline: var(--gutter);
+}
+
+.colaboran h2 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-muted);
+  font-weight: 500;
+  margin: 0 0 1.1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.colaboran ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(1.6rem, 5vw, 3rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.colaboran a { display: block; line-height: 0; }
+.colaboran img { width: auto; display: block; }
+.colaboran li:nth-child(1) img { height: 18px; opacity: 0.8; }
+.colaboran li:nth-child(2) img { height: 36px; opacity: 0.85; }
+.colaboran li:nth-child(3) img { height: 46px; }

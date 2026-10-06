@@ -87,5 +87,22 @@ const dateLabel = entry.data.date
     )
   }
 
+  {
+    entry.data.colaboran && entry.data.colaboran.length > 0 && (
+      <section class="colaboran">
+        <h2>{lang === 'en' ? 'With' : 'Con'}</h2>
+        <ul>
+          {entry.data.colaboran.map((c) => (
+            <li>
+              <a href={c.url} target="_blank" rel="noopener" title={c.nombre}>
+                <img src={withBase(`logos/colaboran/${c.logo}`)} alt={c.nombre} loading="lazy" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
   {rest.length > 0 && <Gallery images={rest} alt={entry.data.title} />}
 </Layout>

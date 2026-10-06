@@ -21,6 +21,11 @@ const proyectos = defineCollection({
         label: z.string().optional(),
       })
       .optional(),
+    // Instituciones que acompañan el proyecto. Se muestran como logos al pie de
+    // la ficha, enlazados a su sitio. Los archivos viven en public/logos/colaboran/.
+    colaboran: z
+      .array(z.object({ nombre: z.string(), logo: z.string(), url: z.string() }))
+      .optional(),
     // Solo usado en la ficha de Acción Neckar (texto bilingüe alemán/español original).
     germanNote: z.string().optional(),
   }),
