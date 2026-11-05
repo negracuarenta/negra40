@@ -1,0 +1,101 @@
+---
+import type { Bloque } from '../lib/actos';
+
+interface Props {
+  bloques: Bloque[];
+}
+
+const { bloques } = Astro.props;
+
+/**
+ * El único énfasis que trae el guion: *hacedores de agua*, en el acto IV.
+ * Se escapa antes para que el texto no pueda inyectar marcado.
+ */
+function enfasis(linea: string): string {
+  const seguro = linea
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  return seguro.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+}
+---
+
+<div class="acto">
+  {
+    bloques.map((b) => {
+      if (b.tipo === 'titulo') return <h3>{b.texto}</h3>;
+      if (b.tipo === 'pausa') return <p class="acto-pausa" aria-hidden="true">(…)</p>;
+      const clase = b.tipo === 'parlamento' ? 'acto-parlamento' : '';
+      return (
+        <p class={clase}>
+          {b.tipo === 'parlamento' && b.quien && <span class="acto-quien">{b.quien}</span>}
+          {b.lineas.map((l, i) => (
+            <>
+              {i > 0 && <br />}
+              <Fragment set:html={enfasis(l)} />
+            </>
+          ))}
+        </p>
+      );
+    })
+  }
+</div>
+
+<style>
+  /* Los cinco actos pasan por acá, así que el formato es el mismo por
+     construcción: no depende de cómo quedó escrito cada archivo. */
+  .acto {
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-inline: var(--space-2);
+    font-size: 0.975rem;
+    line-height: 1.72;
+  }
+
+  .acto h3 {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .acto h3:first-child {
+    margin-top: 0;
+  }
+
+  .acto p {
+    margin-bottom: var(--space-2);
+  }
+
+  /* La pausa del guion. Separa dos textos sin pesar como un título. */
+  .acto-pausa {
+    margin-block: var(--space-3);
+    text-align: center;
+    color: var(--color-muted);
+    letter-spacing: 0.2em;
+  }
+
+  /* Lo que dice el árbol o el pájaro, sangrado y en serif para que se
+     distinga de la narración sin necesidad de acotarlo. */
+  .acto-parlamento {
+    font-family: var(--font-serif);
+    font-size: 1.08em;
+    padding-left: var(--space-2);
+    border-left: 2px solid var(--color-border);
+  }
+
+  .acto-quien {
+    display: block;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 800;
+    font-size: 0.7rem;
+    color: var(--color-muted);
+    margin-bottom: 0.2rem;
+  }
+</style>

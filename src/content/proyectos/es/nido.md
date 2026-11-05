@@ -34,6 +34,16 @@ Nido parte de esa imagen para construir una obra escénica en cinco actos —inv
 
 La obra surge de una pregunta urgente: ¿cómo recuperar la sensibilidad hacia el mundo natural en un tiempo que parecería haberla perdido? Siguiendo el camino de muchas tradiciones amerindias, Nido busca nuevas metáforas para nombrar nuestra relación con la naturaleza: no desde la nostalgia ni desde la denuncia, sino desde el cuerpo, el sonido y la imagen.
 
+## Ver textos de la obra
+
+Cada acto, completo, en castellano, inglés y alemán.
+
+- [Acto I](/es/proyectos/nido/acto-i/)
+- [Acto II](/es/proyectos/nido/acto-ii/)
+- [Acto III](/es/proyectos/nido/acto-iii/)
+- [Acto IV](/es/proyectos/nido/acto-iv/)
+- [Acto V](/es/proyectos/nido/acto-v/)
+
 ## El mapa de los vuelos
 
 La golondrina hace tres viajes —al Este, al Sur y al Oeste— y vuelve cada vez al árbol a contarle lo que vio. Esos recorridos se publicaron como un mapa interactivo: cuarenta y cuatro lugares del mundo, cada uno con su ficha, sus fotos y sus fuentes, en castellano, alemán e inglés.
@@ -45,10 +55,10 @@ La golondrina hace tres viajes —al Este, al Sur y al Oeste— y vuelve cada ve
 - **Proyecto:** Juan Corro y Martín Virgili
 - **Bailarín y coreografía:** Juan Corro
 - **Música y guión:** Martín Virgili
-- **Asistente de coreografía:** Johana Tocci
+- **Asistente de coreografía:** Johanna Tocci
 - **Percusión:** Emmanuel Schvabbauer
 - **Recitación y laúd:** Lea Scholz
 - **Violín:** David Jara
-- **Video:** Andrés
+- **Video:** Matías Tazza
 - **Asistencia técnica:** Federico Ehrenbolger
 - **Mapa:** Martín Virgili

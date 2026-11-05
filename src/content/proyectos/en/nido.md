@@ -34,6 +34,16 @@ Nido sets out from that image to build a stage work in five acts — winter, spr
 
 The work springs from an urgent question: how can we recover our sensitivity towards the natural world in a time that seems to have lost it? Following the path of many Amerindian traditions, Nido looks for new metaphors to name our relationship with nature: not out of nostalgia or denunciation, but starting from the body, from sound and from image.
 
+## Texts from the work
+
+Each act, in full, in Spanish, English and German.
+
+- [Act I](/en/proyectos/nido/acto-i/)
+- [Act II](/en/proyectos/nido/acto-ii/)
+- [Act III](/en/proyectos/nido/acto-iii/)
+- [Act IV](/en/proyectos/nido/acto-iv/)
+- [Act V](/en/proyectos/nido/acto-v/)
+
 ## The map of the flights
 
 The swallow makes three journeys — East, South and West — and each time returns to the tree to tell what it saw. Those routes have been published as an interactive map: forty-four places around the world, each with its own page, photographs and sources, in Spanish, German and English.
@@ -45,10 +55,10 @@ The swallow makes three journeys — East, South and West — and each time retu
 - **Project:** Juan Corro and Martín Virgili
 - **Dancer and choreography:** Juan Corro
 - **Music and script:** Martín Virgili
-- **Choreography assistant:** Johana Tocci
+- **Choreography assistant:** Johanna Tocci
 - **Percussion:** Emmanuel Schvabbauer
 - **Recitation and lute:** Lea Scholz
 - **Violin:** David Jara
-- **Video:** Andrés
+- **Video:** Matías Tazza
 - **Technical assistance:** Federico Ehrenbolger
 - **Map:** Martín Virgili

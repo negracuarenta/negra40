@@ -37,6 +37,22 @@ jobs:
         with:
           path: ./dist
 
+      # La misma compilación, pero colgando de la raíz en vez de /negra40/,
+      # para subir a negra40.com.ar. Copiar la carpeta de arriba no sirve: las
+      # rutas de imágenes, estilos y enlaces llevan el prefijo adentro.
+      - name: Build para el dominio propio
+        env:
+          SITE_BASE: /
+          SITE_URL: https://negra40.com.ar
+        run: npm run build -- --outDir dist-dominio
+
+      - name: Upload sitio para el dominio propio
+        uses: actions/upload-artifact@v4
+        with:
+          name: sitio-negra40.com.ar
+          path: ./dist-dominio
+          retention-days: 30
+
   deploy:
     needs: build
     runs-on: ubuntu-latest

@@ -1,0 +1,12 @@
+---
+import ActoPagina from '../../../../components/ActoPagina.astro';
+import { ACTOS } from '../../../../lib/actos';
+
+export function getStaticPaths() {
+  return ACTOS.map((a) => ({ params: { acto: a.slug } }));
+}
+
+const { acto } = Astro.params;
+---
+
+<ActoPagina lang="es" slug={acto!} />
