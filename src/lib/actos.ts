@@ -1,6 +1,3 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import type { Lang } from '../i18n/ui';
 
 /** Los cinco actos de NIDO, en orden. El slug es lo que va en la URL. */
@@ -37,9 +34,19 @@ export type Bloque =
   | { tipo: 'parlamento'; quien: string | null; lineas: string[] }
   | { tipo: 'parrafo'; lineas: string[] };
 
-// Relativo a este módulo, no al directorio de trabajo: así no depende de desde
-// dónde se corra el build.
-const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../data/actos');
+/**
+ * Los quince textos, empaquetados por Vite en tiempo de compilación.
+ *
+ * Leerlos del disco al renderizar no sirve: después del empaquetado el módulo
+ * vive en dist/chunks/ y cualquier ruta relativa a él apunta a otro lado. Con
+ * glob los textos entran en el grafo de dependencias, así que además el
+ * servidor de desarrollo recarga la página al editar un acto.
+ */
+const CRUDOS = import.meta.glob('../data/actos/*/*.txt', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
 
 // Quién habla, en los tres idiomas. El guion lo marca entre paréntesis al
 // empezar el parlamento: «(árbol) —Quedate.»
@@ -53,8 +60,10 @@ const QUIEN = /^\((árbol|pájaro|tree|bird|Baum|Vogel)\)\s*(.*)$/;
  * que respetarlos, así que no se unen.
  */
 export function leerActo(n: number, idioma: IdiomaActo): Bloque[] {
-  const crudo = fs.readFileSync(path.join(RAIZ, idioma, `acto-${n}.txt`), 'utf-8');
-  return crudo
+  const cola = `/actos/${idioma}/acto-${n}.txt`;
+  const clave = Object.keys(CRUDOS).find((k) => k.endsWith(cola));
+  if (!clave) throw new Error(`Falta el texto ${cola}`);
+  return CRUDOS[clave]
     .split(/\n\s*\n/)
     .map((b) => b.trim())
     .filter(Boolean)
