@@ -27,7 +27,7 @@ export const ui = {
     nav_links: 'Links',
     nav_contacto: 'Contact',
     footer_rights: 'All rights reserved',
-    lang_switch: 'Español',
+    lang_switch: 'Castellano',
     read_more: 'Read more',
     back_to_proyectos: '← Back to Projects',
     search_placeholder: 'Search by title or year…',
