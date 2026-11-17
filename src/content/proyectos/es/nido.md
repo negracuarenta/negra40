@@ -1,7 +1,6 @@
 ---
 title: "NIDO"
-date: 2027-01-01
-datePrecision: anio
+date: 2026-11-10
 order: 0
 category: proyecto
 location: "Heidelberg, Alemania"
@@ -24,7 +23,7 @@ images:
 **NIDO**
 Obra para danza con música en vivo
 
-**Estreno previsto:** 2027, Heidelberg
+**Estreno:** 10 de noviembre de 2026, Heidelberg
 
 Un árbol le ofrece refugio a un pájaro. A cambio le pide una sola cosa: que le cuente lo que ve cuando vuela. Es un trueque entre quien no puede moverse y quien no puede quedarse quieto. Es un pacto entre lo que permanece y lo que viaja. Entre lo que tiene raíces y lo que tiene alas.
 

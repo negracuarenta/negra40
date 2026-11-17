@@ -1,7 +1,6 @@
 ---
 title: "NIDO"
-date: 2027-01-01
-datePrecision: anio
+date: 2026-11-10
 order: 0
 category: proyecto
 location: "Heidelberg, Germany"
@@ -24,7 +23,7 @@ images:
 **NIDO**
 A work for dance with live music
 
-**Premiere planned for:** 2027, Heidelberg
+**Premiere:** November 10, 2026, Heidelberg
 
 A tree offers shelter to a bird. In return it asks for one thing only: that the bird tell it what it sees when it flies. It is a trade between the one who cannot move and the one who cannot keep still. A pact between what remains and what travels. Between what has roots and what has wings.
 
